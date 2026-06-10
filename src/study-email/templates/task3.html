@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <p class="text-uppercase fw-bold mb-1" style="font-size:0.72em; letter-spacing:0.12em; color:#6c63ff;" data-i18n="study-task3-label"></p>
+    <h2 class="bolded-blue" data-i18n="study-task3-header"></h2>
+    <div class="scenario-box">
+      <strong data-i18n="study-scenario-label"></strong><br><br>
+      <span data-i18n="study-scenario-{{scenarioKey}}"></span><br><br>
+      <strong data-i18n="study-scenario-{{scenarioKey}}-task"></strong>
+    </div>
+    <div class="ai-generate-row">
+      <p data-i18n="study-generate-prompt"></p>
+      <button class="btn-generate" id="btn-generate-task3" onclick="window.generateDraft('task3', '{{contextType}}')">
+        <span data-i18n="study-generate-button"></span>
+      </button>
+    </div>
+    <div class="email-compose">
+      <div class="email-field">
+        <label data-i18n="study-email-to-label"></label>
+        <input type="text" id="task3-to" value="boss@company.com" readonly>
+      </div>
+      <div class="email-field">
+        <label data-i18n="study-email-subject-label"></label>
+        <input type="text" id="task3-subject" data-i18n-placeholder="study-email-subject-placeholder">
+      </div>
+      <div class="email-body email-body-large">
+        <textarea id="task3-body" data-i18n-placeholder="study-email-body-placeholder-2"></textarea>
+      </div>
+    </div>
+    <p class="design-note" data-i18n="study-task-design-note"></p>
+    <button class="btn-send-email" onclick="window.showSendConfirm()">
+      &#9658;&nbsp;<span data-i18n="study-send-button"></span>
+    </button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#btn-next-page').hide();
+    $('#task3-subject').attr('placeholder', $.i18n('study-email-subject-placeholder'));
+    $('#task3-body').attr('placeholder', $.i18n('study-email-body-placeholder-2'));
+  });
+</script>

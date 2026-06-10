@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <p class="text-uppercase fw-bold mb-1" style="font-size:0.72em; letter-spacing:0.12em; color:#6c63ff;" data-i18n="study-task1-label"></p>
+    <h2 class="bolded-blue" data-i18n="study-task1-header"></h2>
+    <div class="scenario-box">
+      <strong data-i18n="study-scenario-label"></strong><br><br>
+      <span data-i18n="study-scenario-{{scenarioKey}}"></span><br><br>
+      <strong data-i18n="study-scenario-{{scenarioKey}}-task"></strong>
+    </div>
+    <div class="email-compose">
+      <div class="email-field">
+        <label data-i18n="study-email-to-label"></label>
+        <input type="text" id="task1-to" value="boss@company.com" readonly>
+      </div>
+      <div class="email-field">
+        <label data-i18n="study-email-subject-label"></label>
+        <input type="text" id="task1-subject" data-i18n-placeholder="study-email-subject-placeholder">
+      </div>
+      <div class="email-body">
+        <textarea id="task1-body" data-i18n-placeholder="study-email-body-placeholder-1"></textarea>
+      </div>
+    </div>
+    <p class="design-note" data-i18n="study-task-design-note"></p>
+    <button class="btn-send-email" onclick="window.showSendConfirm()">
+      &#9658;&nbsp;<span data-i18n="study-send-button"></span>
+    </button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#btn-next-page').hide();
+    $('#task1-subject').attr('placeholder', $.i18n('study-email-subject-placeholder'));
+    $('#task1-body').attr('placeholder', $.i18n('study-email-body-placeholder-1'));
+  });
+</script>

@@ -1,0 +1,28 @@
+{
+  "name": "litw-study-email-writing",
+  "version": "1.0.0",
+  "author": "Research Team",
+  "license": "MIT",
+  "description": "A study on AI-assisted professional email writing across cultures.",
+  "dependencies": {
+    "alpaca": "^1.5.27",
+    "bootstrap": "^5.3",
+    "expose-loader": "^4.1.0",
+    "jquery": "3.6.0",
+    "jquery-ui-bundle": "^1.11.4",
+    "lodash": "^4.17.21",
+    "popper.js": "^1.16.1"
+  },
+  "scripts": {
+    "build": "webpack",
+    "develop": "webpack --watch",
+    "devserver": "webpack serve --config webpack.config.js --mode development --static-directory .."
+  },
+  "devDependencies": {
+    "handlebars": "^4.7.7",
+    "webpack": "^5.77.0",
+    "webpack-dev-server": "^4.15.0",
+    "html-loader": "^5.0.0",
+    "webpack-cli": "^5.1.3"
+  }
+}
