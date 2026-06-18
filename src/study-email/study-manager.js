@@ -27,10 +27,7 @@ LITW.engine = litw_engine;
 import progressHTML     from "./templates/progress.html";
 import introHTML        from "./templates/introduction.html";
 import irbHTML          from "./templates/irb2-litw.html";
-import beforeBeginHTML  from "./templates/before-begin.html";
-import instructionsHTML from "./templates/instructions.html";
 import task1HTML        from "./templates/task1.html";
-import beforeAiHTML     from "./templates/before-ai.html";
 import task2HTML        from "./templates/task2.html";
 import task3HTML        from "./templates/task3.html";
 import draftPrefHTML    from "./templates/draft-preference.html";
@@ -43,10 +40,7 @@ Handlebars.registerPartial('prog', Handlebars.compile(progressHTML));
 
 const introTemplate        = Handlebars.compile(introHTML);
 const irbTemplate          = Handlebars.compile(irbHTML);
-const beforeBeginTemplate  = Handlebars.compile(beforeBeginHTML);
-const instructionsTemplate = Handlebars.compile(instructionsHTML);
 const task1Template        = Handlebars.compile(task1HTML);
-const beforeAiTemplate     = Handlebars.compile(beforeAiHTML);
 const task2Template        = Handlebars.compile(task2HTML);
 const task3Template        = Handlebars.compile(task3HTML);
 const draftPrefTemplate    = Handlebars.compile(draftPrefHTML);
@@ -310,21 +304,6 @@ Warm regards,
         display_next_button: false,
       },
 
-      BEFORE_BEGIN: {
-        name: "before_begin",
-        type: LITW.engine.SLIDE_TYPE.SHOW_SLIDE,
-        display_element_id: "before-begin",
-        template: beforeBeginTemplate,
-        display_next_button: true,
-      },
-
-      INSTRUCTIONS: {
-        name: "instructions",
-        type: LITW.engine.SLIDE_TYPE.SHOW_SLIDE,
-        display_element_id: "instructions",
-        template: instructionsTemplate,
-        display_next_button: true,
-      },
 
       TASK1: {
         name: "task1",
@@ -345,14 +324,6 @@ Warm regards,
             timestamp: Date.now()
           });
         }
-      },
-
-      BEFORE_AI: {
-        name: "before_ai",
-        type: LITW.engine.SLIDE_TYPE.SHOW_SLIDE,
-        display_element_id: "before-ai",
-        template: beforeAiTemplate,
-        display_next_button: true,
       },
 
       TASK2: {
@@ -457,10 +428,7 @@ Warm regards,
   function configureTimeline() {
     timeline.push(config.slides.INTRODUCTION);
     timeline.push(config.slides.INFORMED_CONSENT);
-    timeline.push(config.slides.BEFORE_BEGIN);
-    timeline.push(config.slides.INSTRUCTIONS);
     timeline.push(config.slides.TASK1);
-    timeline.push(config.slides.BEFORE_AI);
     timeline.push(config.slides.TASK2);
     timeline.push(config.slides.TASK3);
     timeline.push(config.slides.DRAFT_PREFERENCE);

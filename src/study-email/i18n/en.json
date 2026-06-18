@@ -2,6 +2,7 @@
   "@metadata": { "authors": ["Research Team"], "locale": "en" },
 
   "study-title": "What type of email communicator are you?",
+  "study-title-slogan": "Find out — write three emails and receive personalized feedback on your communication style!",
   "study-time-badge": "⏱ Approximately 10 minutes",
   "study-intro-p1": "Thank you for participating in this study. We are researchers interested in how people write professional emails in everyday workplace situations.",
   "study-intro-p2": "Your responses are completely voluntary and will be kept confidential. You may withdraw at any time without penalty.",
@@ -21,8 +22,8 @@
   "study-instruct-4": "Do not worry about grammar or spelling — content matters more.",
 
   "study-before-begin-header": "About your supervisor in this study",
-  "study-before-begin-p1-intro": "In each task, we would like you to imagine the following situation: ",
-  "study-before-begin-p1-bold": "you have recently started a new job and have met your supervisor only once. You do not yet know them well. Your supervisor is currently away from the office and has asked to be contacted by email only for now.",
+  "study-before-begin-p1-intro": "Please imagine the following situation: ",
+  "study-before-begin-p1-bold": "you have been working at this company for several years and have a well-established relationship with your supervisor. Your supervisor is currently away from the office and has asked to be contacted by email only for now.",
   "study-before-begin-incentive-title": "Personalized feedback:",
   "study-before-begin-incentive-body-intro": "At the end of the study, you will receive personalized feedback on your communication style based on the emails you write. ",
   "study-before-begin-incentive-body-bold": "To make this feedback meaningful, please write each email as naturally as you would in that situation.",
