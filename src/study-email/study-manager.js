@@ -260,7 +260,7 @@ Thank you very much.
     '2c': { 'low-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 2-C low-context]' }, 'high-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 2-C high-context]' } },
     '3a': {
       'low-context': {
-        subject: "Re: New Client Proposal Assignment",
+        subject: "Regarding the New Client Proposal",
         body:
 `Hi [Supervisor's Name],
 
@@ -272,7 +272,7 @@ Best regards,
 [Your Name]`
       },
       'high-context': {
-        subject: "Re: New Client Proposal Assignment",
+        subject: "Regarding the New Client Proposal",
         body:
 `Hi [Supervisor's Name],
 
