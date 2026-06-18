@@ -51,10 +51,22 @@ const resultsFooterTemplate = Handlebars.compile(resultsFooterHTML);
 
 module.exports = (function(exports) {
 
-  // Counterbalancing: assign condition and scenario randomly at load time
-  const condition = Math.random() < 0.5 ? 'A' : 'B';
-  const SCENARIO_KEYS = ['1a', '1b', '1c', '2a', '2b', '2c', '3a', '3b', '3c'];
-  const scenario = SCENARIO_KEYS[Math.floor(Math.random() * SCENARIO_KEYS.length)];
+  // Counterbalancing: Latin square group (scenario rotation) + AI condition order
+  const latinGroup = ['A', 'B', 'C'][Math.floor(Math.random() * 3)];
+  const condition   = Math.random() < 0.5 ? 'A' : 'B';
+
+  // One fixed scenario per type
+  const favorKey    = '1c';
+  const disagreeKey = '2a';
+  const refusalKey  = '3a';
+
+  // Assign scenario to each task based on Latin square group
+  const GROUP_SCENARIOS = {
+    'A': [favorKey,    disagreeKey, refusalKey],
+    'B': [disagreeKey, refusalKey,  favorKey],
+    'C': [refusalKey,  favorKey,    disagreeKey],
+  };
+  const [scenario1, scenario2, scenario3] = GROUP_SCENARIOS[latinGroup];
 
   // Stores Task 1 email for end-of-study feedback scoring
   let task1Email = { subject: '', body: '' };
@@ -175,11 +187,103 @@ Warm regards,
       }
     },
     '1b': { 'low-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 1-B low-context]' }, 'high-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 1-B high-context]' } },
-    '1c': { 'low-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 1-C low-context]' }, 'high-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 1-C high-context]' } },
-    '2a': { 'low-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 2-A low-context]' }, 'high-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 2-A high-context]' } },
+    '1c': {
+      'low-context': {
+        subject: "Request for Leave This Week",
+        body:
+`Hi [Supervisor's Name],
+
+I hope this email finds you well. I am writing to request three days of leave from Wednesday, November 8th, through Friday, November 10th.
+
+A very close friend is getting married this Saturday, and I was only recently asked to be a part of the wedding party. This requires me to travel out of town early to participate in necessary preparations.
+
+I understand this is incredibly short notice and goes against your usual policy for last-minute requests, which I fully respect. However, missing this significant event for a close friend is truly not an option for me.
+
+I am already proactively preparing for my absence by completing urgent tasks and ensuring comprehensive handovers for all critical responsibilities. I am committed to minimizing any disruption.
+
+Thank you for considering my urgent request.
+
+Sincerely, [Your Name]`
+      },
+      'high-context': {
+        subject: "Request for Leave This Week",
+        body:
+`Hi [Supervisor's Name],
+
+I apologize for contacting you while you are away. I sincerely apologize for this sudden message, but I am writing to request three days of leave from this Thursday evening through Sunday.
+
+A long-time close friend's wedding is this Saturday, and last week I was suddenly asked to attend as a member of the wedding party. This has resulted in a very last-minute request, and I am deeply sorry.
+
+I am fully aware that this last-minute leave request goes against your policy, and I am truly sorry. However, I humbly ask for your permission so that I may fulfill this important role in celebrating my close friend's new chapter.
+
+To ensure there is no disruption to work during my absence, I will complete my projects as much as possible in advance, ask my colleague [Name] to handle urgent matters, and ensure a thorough handover.
+
+I apologize for this selfish request, but I sincerely hope you will approve it.
+
+Respectfully, [Your Name]`
+      }
+    },
+    '2a': {
+      'low-context': {
+        subject: "Concern About Switching Data Collection Methods",
+        body:
+`Hi [Supervisor's Name],
+
+Thanks for asking to be contacted by email while you're away. After today's meeting I wanted to flag a concern about switching data-collection methods mid-project. Based on our experience in the first phase, changing methods now will introduce inconsistencies between datasets and impede comparability, increasing the likelihood that our final analysis will be unreliable and may not withstand stakeholder scrutiny.
+
+I recommend either maintaining the current method through completion or running a small parallel pilot of the new method while documenting differences for analysis adjustments. I can prepare a brief impact assessment and proposed options for your review. Would you like me to proceed?
+
+Best regards, [Your Name]`
+      },
+      'high-context': {
+        subject: "Concern About Switching Data Collection Methods",
+        body:
+`Hi [Supervisor's Name],
+
+Thank you for your hard work.
+
+I am writing to share a concern regarding the change to the data collection method explained in today's meeting.
+
+A change midway through the project may make it difficult to maintain consistency with existing data. As a result, I feel there is a risk that the reliability of the final analysis will decrease, and that the validity of the results may be questioned when reporting to the client.
+
+I apologize for the inconvenience during your busy schedule, but would it be possible to reconsider the timing and procedure of the change?
+
+Thank you very much.
+
+[Your Name]`
+      }
+    },
     '2b': { 'low-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 2-B low-context]' }, 'high-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 2-B high-context]' } },
     '2c': { 'low-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 2-C low-context]' }, 'high-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 2-C high-context]' } },
-    '3a': { 'low-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 3-A low-context]' }, 'high-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 3-A high-context]' } },
+    '3a': {
+      'low-context': {
+        subject: "Re: New Client Proposal Assignment",
+        body:
+`Hi [Supervisor's Name],
+
+Per your request to communicate by email while you're away: thank you for considering me to lead the new client proposal. I'm currently managing two projects with critical deadlines within the next ten days; taking on the proposal would require about 15 additional hours and would force substantial quality trade-offs or missed deliverables on those projects. Given that, I can't accept the proposal assignment at this time without risking our commitments.
+
+I can, however, help by outlining the proposal framework, mentoring a colleague to lead it, or starting a first draft for handoff. Please let me know which alternative you prefer or if you'd like to revisit this after next week.
+
+Best regards, [Your Name]`
+      },
+      'high-context': {
+        subject: "Re: New Client Proposal Assignment",
+        body:
+`Hi [Supervisor's Name],
+
+Thank you for your hard work.
+
+I have received your request regarding the new client proposal. I would very much like to help, but I currently have two projects on hand, both with important deadlines within the next ten days.
+
+I estimate that approximately 15 additional hours will be needed for this proposal, and it would be difficult to maintain the quality and meet the deadlines of my existing work.
+
+I sincerely apologize, but I find it difficult to take this on at this time. Would you consider asking someone else? I am happy to assist with anything I can.
+
+Thank you very much.
+[Your Name]`
+      }
+    },
     '3b': { 'low-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 3-B low-context]' }, 'high-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 3-B high-context]' } },
     '3c': { 'low-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 3-C low-context]' }, 'high-context': { subject: '[Draft coming soon]', body: '[AI draft for scenario 3-C high-context]' } },
   };
@@ -218,11 +322,107 @@ Warm regards,
       }
     },
     '1b': { 'low-context': { subject: '[下書き準備中]', body: '[シナリオ1-B 低コンテキスト]' }, 'high-context': { subject: '[下書き準備中]', body: '[シナリオ1-B 高コンテキスト]' } },
-    '1c': { 'low-context': { subject: '[下書き準備中]', body: '[シナリオ1-C 低コンテキスト]' }, 'high-context': { subject: '[下書き準備中]', body: '[シナリオ1-C 高コンテキスト]' } },
-    '2a': { 'low-context': { subject: '[下書き準備中]', body: '[シナリオ2-A 低コンテキスト]' }, 'high-context': { subject: '[下書き準備中]', body: '[シナリオ2-A 高コンテキスト]' } },
+    '1c': {
+      'low-context': {
+        subject: "今週の休暇申請について",
+        body:
+`[上司の名前]様
+
+お世話になっております。11月8日（水）から11月10日（金）の3日間、休暇をいただきたくご連絡いたしました。
+
+今週の土曜日に非常に親しい友人の結婚式があり、つい最近になってウェディングパーティーのメンバーとして参加するよう依頼されました。そのため、準備への参加のために早めに遠方へ移動する必要がございます。
+
+これが非常に直前のご連絡であり、また直前申請に関する通常のポリシーにも反することは理解しており、そのポリシーを完全に尊重しております。しかしながら、親しい友人のこの大切な節目を欠席することは、私にとって本当に選択肢にはありません。
+
+すでに緊急タスクの完了と重要な業務すべてについての包括的な引き継ぎを確実に行うことで、不在に向けた準備を積極的に進めております。業務への支障を最小限に抑えることをお約束いたします。
+
+急なお願いをご検討いただき、ありがとうございます。
+
+[あなたの名前]`
+      },
+      'high-context': {
+        subject: "今週の休暇申請について",
+        body:
+`[上司の名前]様
+
+ご不在のところ恐縮です。突然のご連絡で大変申し訳ございませんが、今週木曜日の夜から日曜までの3日間、休暇をいただきたくお願い申し上げます。
+
+今週土曜日に長年の親友の結婚式があり、先週になり急遽、ウエディングパーティーのメンバーとして出席することになりました。このため、大変直前のご依頼となってしまいました。
+
+直前の休暇申請は貴殿の方針に反すると重々承知しており、誠に恐縮でございます。しかし、親友の門出を祝う大切な役目を果たすため、何卒お許しいただきたく存じます。
+
+不在中の業務に支障が出ないよう、案件は可能な限り前倒しで完了させ、緊急時の対応は同僚の〇〇さんに依頼し、万全の引継ぎを行います。
+
+身勝手なお願いで恐縮ですが、何卒ご承認いただけますよう、お願い申し上げます。
+
+敬具
+
+[あなたの名前]`
+      }
+    },
+    '2a': {
+      'low-context': {
+        subject: "データ収集方法の変更について",
+        body:
+`[上司の名前]様
+
+メールにてご連絡するようご指示いただきありがとうございます。本日の会議でのデータ収集方法の変更について、一点懸念がございます。第一フェーズでの経験を踏まえますと、現時点での方法変更はデータセット間に不整合をもたらし、一貫した比較が難しくなります。その結果、最終分析の信頼性が低下し、ステークホルダーへの報告時に結果の妥当性を問われる可能性が高まります。
+
+現行の方法を完了まで維持するか、新しい方法を小規模で並行して試しながら分析調整のために差異を記録するか、いずれかをお勧めします。簡単な影響のまとめと対応案をご用意いたします。いかがでしょうか。
+
+よろしくお願いいたします。
+[あなたの名前]`
+      },
+      'high-context': {
+        subject: "データ収集方法の変更について",
+        body:
+`[上司の名前]様
+
+お疲れ様です。
+
+本日のミーティングでご説明いただいたデータ収集方法の変更について、一点懸念をお伝えしたく連絡いたしました。
+
+プロジェクト途中での変更により、既存データとの間に一貫性が生じにくくなる可能性があります。その結果、最終分析の信頼性が低下し、取引先への報告時に結果の妥当性を問われるリスクがあると感じております。
+
+ご多忙の折、恐縮ではございますが、変更の時期や手順について改めてご検討いただけますでしょうか。
+
+何卒よろしくお願いいたします。
+
+[あなたの名前]`
+      }
+    },
     '2b': { 'low-context': { subject: '[下書き準備中]', body: '[シナリオ2-B 低コンテキスト]' }, 'high-context': { subject: '[下書き準備中]', body: '[シナリオ2-B 高コンテキスト]' } },
     '2c': { 'low-context': { subject: '[下書き準備中]', body: '[シナリオ2-C 低コンテキスト]' }, 'high-context': { subject: '[下書き準備中]', body: '[シナリオ2-C 高コンテキスト]' } },
-    '3a': { 'low-context': { subject: '[下書き準備中]', body: '[シナリオ3-A 低コンテキスト]' }, 'high-context': { subject: '[下書き準備中]', body: '[シナリオ3-A 高コンテキスト]' } },
+    '3a': {
+      'low-context': {
+        subject: "新規クライアント提案のご依頼について",
+        body:
+`[上司の名前]様
+
+ご依頼の通りメールにてご連絡いたします：新規クライアント提案の代表としてご検討いただき、ありがとうございます。現在、今後10日以内に重要な締め切りを抱えるプロジェクトを2件担当しております。この提案を引き受けることになると、追加でだいたい15時間が必要となり、それらのプロジェクトで大幅な品質の妥協または成果物の遅延が生じます。そのため、現状ではコミットメントをリスクにさらすことなく提案の担当を引き受けることはできません。
+
+ただし、提案のフレームワーク作成、同僚がリードできるよう指導、または引き継ぎのための初稿作成といった形でお手伝いできます。どの代替案をご希望か、あるいは来週以降に再検討をご希望かをお知らせください。
+
+よろしくお願いいたします。
+[あなたの名前]`
+      },
+      'high-context': {
+        subject: "新規クライアント提案のご依頼について",
+        body:
+`[上司の名前]様
+
+お疲れ様です。
+
+新規クライアント向け提案書のご依頼、承りました。ぜひお力になりたいのですが、現在2つのプロジェクトを抱えており、どちらも今後10日以内に重要な締め切りが迫っております。
+
+今回の提案書には追加で約15時間が必要と見込まれ、既存業務の品質と締め切りを守ることが難しい状況です。
+
+誠に恐れ入りますが、今回はお引き受けが難しい状況です。他の方へのご依頼をご検討いただけますでしょうか。何かできることがあれば、喜んで対応いたします。
+
+よろしくお願いいたします。
+[あなたの名前]`
+      }
+    },
     '3b': { 'low-context': { subject: '[下書き準備中]', body: '[シナリオ3-B 低コンテキスト]' }, 'high-context': { subject: '[下書き準備中]', body: '[シナリオ3-B 高コンテキスト]' } },
     '3c': { 'low-context': { subject: '[下書き準備中]', body: '[シナリオ3-C 低コンテキスト]' }, 'high-context': { subject: '[下書き準備中]', body: '[シナリオ3-C 高コンテキスト]' } },
   };
@@ -231,7 +431,8 @@ Warm regards,
   window.generateDraft = function(taskId, contextType) {
     const lang = $.i18n().locale || 'en';
     const draftSet = lang.startsWith('ja') ? drafts_ja : drafts;
-    const draft = (draftSet[scenario] || {})[contextType];
+    const scenarioKey = taskId === 'task2' ? scenario2 : scenario3;
+    const draft = (draftSet[scenarioKey] || {})[contextType];
     if (!draft) return;
 
     const btn = document.getElementById('btn-generate-' + taskId);
@@ -310,14 +511,15 @@ Warm regards,
         type: LITW.engine.SLIDE_TYPE.SHOW_SLIDE,
         display_element_id: "task1",
         template: task1Template,
-        template_data: { scenarioKey: scenario },
+        template_data: { scenarioKey: scenario1 },
         display_next_button: false,
         finish: function() {
           task1Email.subject = $('#task1-subject').val();
           task1Email.body    = $('#task1-body').val();
           LITW.data.submitStudyData({
             slide: 'task1',
-            scenario: scenario,
+            scenario: scenario1,
+            latin_group: latinGroup,
             condition: condition,
             email_subject: task1Email.subject,
             email_body: task1Email.body,
@@ -331,13 +533,14 @@ Warm regards,
         type: LITW.engine.SLIDE_TYPE.SHOW_SLIDE,
         display_element_id: "task2",
         template: task2Template,
-        template_data: { contextType: task2Context, scenarioKey: scenario },
+        template_data: { contextType: task2Context, scenarioKey: scenario2 },
         display_next_button: false,
         finish: function() {
           const btn = document.getElementById('btn-generate-task2');
           LITW.data.submitStudyData({
             slide: 'task2',
-            scenario: scenario,
+            scenario: scenario2,
+            latin_group: latinGroup,
             condition: condition,
             context_type: task2Context,
             email_subject: $('#task2-subject').val(),
@@ -353,13 +556,14 @@ Warm regards,
         type: LITW.engine.SLIDE_TYPE.SHOW_SLIDE,
         display_element_id: "task3",
         template: task3Template,
-        template_data: { contextType: task3Context, scenarioKey: scenario },
+        template_data: { contextType: task3Context, scenarioKey: scenario3 },
         display_next_button: false,
         finish: function() {
           const btn = document.getElementById('btn-generate-task3');
           LITW.data.submitStudyData({
             slide: 'task3',
-            scenario: scenario,
+            scenario: scenario3,
+            latin_group: latinGroup,
             condition: condition,
             context_type: task3Context,
             email_subject: $('#task3-subject').val(),
