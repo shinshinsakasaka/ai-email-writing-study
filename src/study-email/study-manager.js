@@ -203,7 +203,8 @@ I am already proactively preparing for my absence by completing urgent tasks and
 
 Thank you for considering my urgent request.
 
-Sincerely, [Your Name]`
+Sincerely,
+[Your Name]`
       },
       'high-context': {
         subject: "Request for Leave This Week",
@@ -220,7 +221,8 @@ To ensure there is no disruption to work during my absence, I will complete my p
 
 I apologize for this selfish request, but I sincerely hope you will approve it.
 
-Respectfully, [Your Name]`
+Respectfully,
+[Your Name]`
       }
     },
     '2a': {
@@ -233,7 +235,8 @@ Thanks for asking to be contacted by email while you're away. After today's meet
 
 I recommend either maintaining the current method through completion or running a small parallel pilot of the new method while documenting differences for analysis adjustments. I can prepare a brief impact assessment and proposed options for your review. Would you like me to proceed?
 
-Best regards, [Your Name]`
+Best regards,
+[Your Name]`
       },
       'high-context': {
         subject: "Concern About Switching Data Collection Methods",
@@ -265,7 +268,8 @@ Per your request to communicate by email while you're away: thank you for consid
 
 I can, however, help by outlining the proposal framework, mentoring a colleague to lead it, or starting a first draft for handoff. Please let me know which alternative you prefer or if you'd like to revisit this after next week.
 
-Best regards, [Your Name]`
+Best regards,
+[Your Name]`
       },
       'high-context': {
         subject: "Re: New Client Proposal Assignment",
