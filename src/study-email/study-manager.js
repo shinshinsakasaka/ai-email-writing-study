@@ -51,9 +51,29 @@ const resultsFooterTemplate = Handlebars.compile(resultsFooterHTML);
 
 module.exports = (function(exports) {
 
+  // URL-based condition assignment via ?g= code
+  const CONDITION_MAP = {
+    'EA1': { lang: 'en', condition: 'A', latinGroup: 'A' },
+    'EA2': { lang: 'en', condition: 'A', latinGroup: 'B' },
+    'EA3': { lang: 'en', condition: 'A', latinGroup: 'C' },
+    'EB1': { lang: 'en', condition: 'B', latinGroup: 'A' },
+    'EB2': { lang: 'en', condition: 'B', latinGroup: 'B' },
+    'EB3': { lang: 'en', condition: 'B', latinGroup: 'C' },
+    'JA1': { lang: 'ja', condition: 'A', latinGroup: 'A' },
+    'JA2': { lang: 'ja', condition: 'A', latinGroup: 'B' },
+    'JA3': { lang: 'ja', condition: 'A', latinGroup: 'C' },
+    'JB1': { lang: 'ja', condition: 'B', latinGroup: 'A' },
+    'JB2': { lang: 'ja', condition: 'B', latinGroup: 'B' },
+    'JB3': { lang: 'ja', condition: 'B', latinGroup: 'C' },
+  };
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const groupCode = urlParams.get('g');
+  const decoded   = CONDITION_MAP[groupCode] || null;
+
   // Counterbalancing: Latin square group (scenario rotation) + AI condition order
-  const latinGroup = ['A', 'B', 'C'][Math.floor(Math.random() * 3)];
-  const condition   = Math.random() < 0.5 ? 'A' : 'B';
+  const latinGroup = decoded ? decoded.latinGroup : ['A', 'B', 'C'][Math.floor(Math.random() * 3)];
+  const condition   = decoded ? decoded.condition  : (Math.random() < 0.5 ? 'A' : 'B');
 
   // One fixed scenario per type
   const favorKey    = '1c';
@@ -487,7 +507,7 @@ Thank you very much.
       'en': './i18n/en.json?v=1.4',
       'ja': './i18n/ja.json?v=1.4',
     },
-    study_id: "email-writing-study-v1",
+    study_id: "93729edc-5d19-45e1-b9ce-63382fe1bb89",
     study_recommendation: [],
     preLoad: ["../img/btn-next.png", "../img/btn-next-active.png", "../img/ajax-loader.gif"],
     slides: {
@@ -522,6 +542,7 @@ Thank you very much.
           task1Email.body    = $('#task1-body').val();
           LITW.data.submitStudyData({
             slide: 'task1',
+            group_code: groupCode,
             scenario: scenario1,
             latin_group: latinGroup,
             condition: condition,
@@ -543,6 +564,7 @@ Thank you very much.
           const btn = document.getElementById('btn-generate-task2');
           LITW.data.submitStudyData({
             slide: 'task2',
+            group_code: groupCode,
             scenario: scenario2,
             latin_group: latinGroup,
             condition: condition,
@@ -566,6 +588,7 @@ Thank you very much.
           const btn = document.getElementById('btn-generate-task3');
           LITW.data.submitStudyData({
             slide: 'task3',
+            group_code: groupCode,
             scenario: scenario3,
             latin_group: latinGroup,
             condition: condition,
@@ -588,6 +611,7 @@ Thank you very much.
           const pref = $('input[name="draft-pref"]:checked').val();
           LITW.data.submitStudyData({
             slide: 'draft_preference',
+            group_code: groupCode,
             preferred_draft: pref || 'no_response',
             condition: condition,
             task2_context: task2Context,
@@ -665,6 +689,7 @@ Thank you very much.
     };
     LITW.data.submitStudyData({
       slide: 'feedback_scores',
+      group_code: groupCode,
       indirectness: scores.indirectness,
       imposition:   scores.imposition,
       profile:      scores.profile,
@@ -697,6 +722,10 @@ Thank you very much.
   }
 
   $(document).ready(function() {
+    if (decoded && !urlParams.has('locale')) {
+      urlParams.set('locale', decoded.lang);
+      window.history.replaceState({}, '', '?' + urlParams.toString());
+    }
     bootstrap();
   });
 

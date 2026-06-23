@@ -29,7 +29,7 @@
   color: #999;
   width: 70px;
   flex-shrink: 0;
-  font-size: 0.88em;
+  font-size: 1em;
   font-weight: 600;
   margin: 0;
 }
@@ -39,7 +39,7 @@
   border: none;
   outline: none;
   font-family: inherit;
-  font-size: 0.95em;
+  font-size: 1.05em;
   color: #333;
   background: transparent;
 }
@@ -48,19 +48,19 @@
   border: none;
   outline: none;
   width: 100%;
-  min-height: 200px;
+  min-height: 300px;
   resize: vertical;
   font-family: inherit;
-  font-size: 0.95em;
+  font-size: 1.05em;
   color: #333;
-  padding: 12px 14px;
+  padding: 14px 16px;
   margin: 0;
   box-sizing: border-box;
   display: block;
 }
 
 .email-body-large textarea {
-  min-height: 320px;
+  min-height: 420px;
 }
 
 .ai-generate-row {
@@ -107,6 +107,8 @@
   font-weight: 600;
   cursor: pointer;
   margin-top: 14px;
+  margin-left: auto;
+  display: block;
   transition: background 0.2s;
 }
 
