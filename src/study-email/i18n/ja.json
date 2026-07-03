@@ -1,6 +1,13 @@
 {
   "@metadata": { "authors": ["Research Team"], "locale": "ja" },
 
+  "study-prolific-header": "始める前に",
+  "study-prolific-desc": "続けるには、ProlificのIDを入力してください。参加確認のみに使用します。",
+  "study-prolific-label": "あなたのProlific ID",
+  "study-prolific-placeholder": "Prolific IDを入力してください…",
+  "study-prolific-button": "続ける",
+  "study-prolific-error": "続けるにはProlific IDを入力してください。",
+
   "study-title": "あなたのビジネスメール、どんなスタイル？",
   "study-title-slogan": "3つのメールを書いて、あなたのコミュニケーションスタイルに関するフィードバックを受け取りましょう！",
   "study-time-badge": "⏱ 所要時間：約10分",

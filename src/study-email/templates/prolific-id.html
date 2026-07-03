@@ -1,0 +1,30 @@
+<div class="instructions-stim-container">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <h2 class="bolded-blue text-center mb-3" data-i18n="study-prolific-header"></h2>
+      <p class="text-center mb-4" data-i18n="study-prolific-desc"></p>
+
+      <div class="mb-4">
+        <label for="prolific-id-input" class="form-label fw-bold" data-i18n="study-prolific-label"></label>
+        <input type="text" id="prolific-id-input" class="form-control form-control-lg"
+               data-i18n-placeholder="study-prolific-placeholder"
+               autocomplete="off" spellcheck="false">
+        <div id="prolific-id-error" class="text-danger mt-2" style="display:none;" data-i18n="study-prolific-error"></div>
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="button" id="btn-prolific-submit" class="btn btn-primary btn-lg px-5"
+                data-i18n="study-prolific-button"
+                onclick="window.submitProlificId()">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#prolific-id-input').attr('placeholder', $.i18n('study-prolific-placeholder'));
+    $('#btn-next-page').hide();
+  });
+</script>

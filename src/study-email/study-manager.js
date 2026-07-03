@@ -25,6 +25,7 @@ LITW.engine = litw_engine;
 
 // Load templates
 import progressHTML     from "./templates/progress.html";
+import prolificIdHTML   from "./templates/prolific-id.html";
 import introHTML        from "./templates/introduction.html";
 import irbHTML          from "./templates/irb2-litw.html";
 import task1HTML        from "./templates/task1.html";
@@ -38,6 +39,7 @@ import resultsFooterHTML from "./templates/results-footer.html";
 
 Handlebars.registerPartial('prog', Handlebars.compile(progressHTML));
 
+const prolificIdTemplate   = Handlebars.compile(prolificIdHTML);
 const introTemplate        = Handlebars.compile(introHTML);
 const irbTemplate          = Handlebars.compile(irbHTML);
 const task1Template        = Handlebars.compile(task1HTML);
@@ -451,6 +453,24 @@ Thank you very much.
     '3c': { 'low-context': { subject: '[下書き準備中]', body: '[シナリオ3-C 低コンテキスト]' }, 'high-context': { subject: '[下書き準備中]', body: '[シナリオ3-C 高コンテキスト]' } },
   };
 
+  let prolificId = '';
+
+  window.submitProlificId = function() {
+    const val = $('#prolific-id-input').val().trim();
+    if (!val) {
+      $('#prolific-id-error').show();
+      return;
+    }
+    prolificId = val;
+    LITW.data.submitStudyData({
+      slide: 'prolific_id',
+      prolific_id: prolificId,
+      group_code: groupCode,
+      timestamp: Date.now()
+    });
+    $('#btn-next-page').click();
+  };
+
   // Expose generateDraft globally so templates can call it
   window.generateDraft = function(taskId, contextType) {
     const lang = $.i18n().locale || 'en';
@@ -511,6 +531,14 @@ Thank you very much.
     study_recommendation: [],
     preLoad: ["../img/btn-next.png", "../img/btn-next-active.png", "../img/ajax-loader.gif"],
     slides: {
+
+      PROLIFIC_ID: {
+        name: "prolific_id",
+        type: LITW.engine.SLIDE_TYPE.SHOW_SLIDE,
+        display_element_id: "prolific-id",
+        template: prolificIdTemplate,
+        display_next_button: false,
+      },
 
       INTRODUCTION: {
         name: "introduction",
@@ -658,6 +686,7 @@ Thank you very much.
   };
 
   function configureTimeline() {
+    timeline.push(config.slides.PROLIFIC_ID);
     timeline.push(config.slides.INTRODUCTION);
     timeline.push(config.slides.INFORMED_CONSENT);
     timeline.push(config.slides.TASK1);
@@ -672,9 +701,7 @@ Thank you very much.
 
   function showResults() {
     let results = {};
-    if ('PID' in LITW.data.getURLparams) {
-      results.code = LITW.data.getParticipantId();
-    }
+    results.code = 'CXF0VJC8';
 
     const lang = $.i18n().locale || 'en';
     const scores = scoreEmail(task1Email.subject, task1Email.body, lang);

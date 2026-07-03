@@ -1,6 +1,13 @@
 {
   "@metadata": { "authors": ["Research Team"], "locale": "en" },
 
+  "study-prolific-header": "Before we begin",
+  "study-prolific-desc": "Please enter your Prolific ID to continue. This is used only to verify your participation.",
+  "study-prolific-label": "Your Prolific ID",
+  "study-prolific-placeholder": "Enter your Prolific ID…",
+  "study-prolific-button": "Continue",
+  "study-prolific-error": "Please enter your Prolific ID before continuing.",
+
   "study-title": "What type of email communicator are you?",
   "study-title-slogan": "Find out — write three emails and receive personalized feedback on your communication style!",
   "study-time-badge": "⏱ Approximately 10 minutes",
