@@ -92,6 +92,7 @@
   "study-pref-no-task2": "タスク2ではAIの下書きを使用しなかった",
   "study-pref-no-task3": "タスク3ではAIの下書きを使用しなかった",
   "study-pref-no-either": "どちらのタスクでもAIの下書きを使用しなかった",
+  "study-pref-why-label": "AIの下書きを使用しなかった理由を教えていただけますか？",
 
   "study-demographics-tenure": "現在の会社に勤めて何年になりますか？",
   "study-demographics-tenure-less1": "1年未満",

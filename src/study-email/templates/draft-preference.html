@@ -32,5 +32,21 @@
         <span data-i18n="study-pref-no-either"></span>
       </label>
     </div>
+
+    <div id="draft-no-reason-box" class="mt-4" style="display:none;">
+      <label class="form-label fw-semibold" data-i18n="study-pref-why-label"></label>
+      <textarea id="draft-no-reason" class="form-control mt-1" rows="3"></textarea>
+    </div>
   </div>
 </div>
+<script>
+  $('input[name="draft-pref"]').on('change', function() {
+    var val = $(this).val();
+    if (val === 'no_task2' || val === 'no_task3' || val === 'no_either') {
+      $('#draft-no-reason-box').show();
+    } else {
+      $('#draft-no-reason-box').hide();
+      $('#draft-no-reason').val('');
+    }
+  });
+</script>

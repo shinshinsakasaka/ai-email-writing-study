@@ -92,6 +92,7 @@
   "study-pref-no-task2": "I did not use the AI draft in Task 2",
   "study-pref-no-task3": "I did not use the AI draft in Task 3",
   "study-pref-no-either": "I did not use the AI draft in either task",
+  "study-pref-why-label": "Could you tell us why you did not use the AI draft?",
 
   "study-demographics-tenure": "How long have you been working at your current company?",
   "study-demographics-tenure-less1": "Less than 1 year",

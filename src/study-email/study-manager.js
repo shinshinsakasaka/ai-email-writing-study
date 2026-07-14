@@ -637,10 +637,12 @@ Thank you very much.
         display_next_button: true,
         finish: function() {
           const pref = $('input[name="draft-pref"]:checked').val();
+          const noReason = $('#draft-no-reason').val() || '';
           LITW.data.submitStudyData({
             slide: 'draft_preference',
             group_code: groupCode,
             preferred_draft: pref || 'no_response',
+            draft_no_reason: noReason,
             condition: condition,
             task2_context: task2Context,
             task3_context: task3Context,
